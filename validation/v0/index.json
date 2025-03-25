@@ -1,0 +1,13 @@
+{
+    "$schema": "https://json-structure.github.io/meta/extended/v0",
+    "$id": "https://json-structure.github.io/meta/validation/v0",
+    "$import": "https://json-structure.github.io/meta/extended/v0",
+    "$uses": [
+      "Altnames",
+      "Units",
+      "Import",
+      "Conditionals",
+      "Validation"
+    ],
+    "$root": "#/$defs/SchemaDocument"
+}

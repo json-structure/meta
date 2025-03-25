@@ -1,0 +1,386 @@
+{
+  "$schema": "https://json-structure.github.io/meta/core/v0",
+  "$id": "https://json-structure.github.io/meta/extended/v0",
+  "$import": "https://json-structure.github.io/meta/core/v0",
+  "$uses": [
+    "Import"
+  ],
+  "$offers": {
+    "Altnames": [
+      "#/$defs/Features/Altnames",
+      "#/$defs/Features/Altsymbols"
+    ],
+    "Units": [
+      "#/$defs/Features/UnitsPropertyAddIn",
+      "#/$defs/Features/UnitsArrayAddIn",
+      "#/$defs/Features/UnitsMapAddIn"
+    ],
+    "Import": "#/$defs/Features/ImportAddIn",
+    "Conditionals": "#/$defs/Features/CompositionObjectAddIn",
+    "Validation": [
+      "#/$defs/Features/NumberValidationAddIn",
+      "#/$defs/Features/StringValidationAddIn",
+      "#/$defs/Features/StringFormatAddIn",
+      "#/$defs/Features/ArrayValidationAddIn",
+      "#/$defs/Features/ObjectValidationAddIn"
+    ]
+  },
+  "$root": "#/$defs/SchemaDocument",
+  "name": "JsonSchema",
+  "$defs": {
+    "Features": {
+      "description": "Collection of Feature definitions for extended annotations.",
+      "Altnames": {
+        "type": "object",
+        "abstract": true,
+        "description": "Feature for alternate names annotation.",
+        "$extends": "#/$defs/Property",
+        "properties": {
+          "altnames": {
+            "type": "map",
+            "values": "string"
+          }
+        }
+      },
+      "Altsymbols": {
+        "type": "object",
+        "abstract": true,
+        "description": "Feature for alternate symbols annotation.",
+        "$extends": "#/$defs/Property",
+        "properties": {
+          "altsymbols": {
+            "type": "map",
+            "values": {
+              "$ref": "#/$defs/Features/AltsymbolSymbols"
+            }
+          }
+        }
+      },
+      "AltsymbolSymbols": {
+        "type": "map",
+        "description": "Mapping for alternate symbol values.",
+        "values": "string"
+      },
+      "UnitsPropertyAddIn": {
+        "name": "UnitsAddIn",
+        "abstract": true,
+        "description": "Feature for unit annotations on property types.",
+        "$extends": "#/$defs/Property",
+        "type": "object",
+        "properties": {
+          "unit": {
+            "type": "string",
+            "description": "Unit of measurement (e.g., 'kg', 'm', 's')."
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnitsArrayAddIn": {
+        "name": "UnitsAddIn",
+        "abstract": true,
+        "description": "Feature for unit annotations on array types.",
+        "$extends": "#/$defs/ArrayType",
+        "type": "object",
+        "properties": {
+          "unit": {
+            "type": "string",
+            "description": "Unit of measurement (e.g., 'kg', 'm', 's')."
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnitsMapAddIn": {
+        "name": "UnitsAddIn",
+        "abstract": true,
+        "description": "Feature for unit annotations on map types.",
+        "$extends": "#/$defs/MapType",
+        "type": "object",
+        "properties": {
+          "unit": {
+            "type": "string",
+            "description": "Unit of measurement (e.g., 'kg', 'm', 's')."
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImportAddIn": {
+        "description": "Feature that enables importing definitions from another namespace.",
+        "name": "ImportAddIn",
+        "abstract": true,
+        "$extends": "#/$defs/Namespace",
+        "type": "map",
+        "values": [
+          {
+            "$ref": "#/definitions/ObjectType"
+          },
+          {
+            "$ref": "#/definitions/ArrayType"
+          },
+          {
+            "$ref": "#/definitions/MapType"
+          },
+          {
+            "$ref": "#/definitions/Namespace"
+          },
+          {
+            "$ref": "#/definitions/Features/ImportAddInReference"
+          }
+        ]
+      },
+      "ImportAddInReference": {
+        "name": "ImportAddIn",
+        "description": "Feature reference for imported definitions.",
+        "type": "object",
+        "properties": {
+          "$import": {
+            "type": "uri",
+            "description": "A reference to an existing namespace definition"
+          },
+          "$importdefs": {
+            "type": "uri",
+            "description": "A reference to an existing namespace definition"
+          }
+        }
+      },
+      "CompositionObjectAddIn": {
+        "name": "CompositionObjectAddIn",
+        "abstract": true,
+        "description": "Feature for composition constraints such as anyOf, oneOf, allOf, not, if, then, and else.",
+        "$extends": "#/$defs/NoType",
+        "type": "object",
+        "properties": {
+          "anyOf": {
+            "type": [
+              {
+                "$ref": "#/definitions/TypeReference"
+              },
+              {
+                "$ref": "#/definitions/PrimitiveType"
+              },
+              {
+                "$ref": "#/definitions/TypeUnion"
+              }
+            ]
+          },
+          "oneOf": {
+            "type": [
+              {
+                "$ref": "#/definitions/TypeReference"
+              },
+              {
+                "$ref": "#/definitions/PrimitiveType"
+              },
+              {
+                "$ref": "#/definitions/TypeUnion"
+              }
+            ]
+          },
+          "allOf": {
+            "type": [
+              {
+                "$ref": "#/definitions/TypeReference"
+              },
+              {
+                "$ref": "#/definitions/PrimitiveType"
+              },
+              {
+                "$ref": "#/definitions/TypeUnion"
+              }
+            ]
+          },
+          "not": {
+            "type": [
+              {
+                "$ref": "#/definitions/TypeReference"
+              },
+              {
+                "$ref": "#/definitions/PrimitiveType"
+              },
+              {
+                "$ref": "#/definitions/TypeUnion"
+              }
+            ]
+          },
+          "if": {
+            "type": [
+              {
+                "$ref": "#/definitions/TypeReference"
+              },
+              {
+                "$ref": "#/definitions/PrimitiveType"
+              },
+              {
+                "$ref": "#/definitions/TypeUnion"
+              }
+            ]
+          },
+          "then": {
+            "type": [
+              {
+                "$ref": "#/definitions/TypeReference"
+              },
+              {
+                "$ref": "#/definitions/PrimitiveType"
+              },
+              {
+                "$ref": "#/definitions/TypeUnion"
+              }
+            ]
+          },
+          "else": {
+            "type": [
+              {
+                "$ref": "#/definitions/TypeReference"
+              },
+              {
+                "$ref": "#/definitions/PrimitiveType"
+              },
+              {
+                "$ref": "#/definitions/TypeUnion"
+              }
+            ]
+          }
+        }
+      },
+      "NumberValidationAddIn": {
+        "name": "NumberValidationAddIn",
+        "abstract": true,
+        "description": "Feature for numeric validations (e.g., minimum, maximum, multipleOf).",
+        "$extends": "#/$defs/OptionalPrimitiveType",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "number",
+              "integer",
+              "float",
+              "double",
+              "decimal",
+              "int32",
+              "uint32",
+              "int64",
+              "uint64",
+              "int128",
+              "uint128"
+            ]
+          },
+          "minimum": {
+            "type": "number"
+          },
+          "maximum": {
+            "type": "number"
+          },
+          "exclusiveMinimum": {
+            "type": "boolean"
+          },
+          "exclusiveMaximum": {
+            "type": "boolean"
+          },
+          "multipleOf": {
+            "type": "number"
+          }
+        }
+      },
+      "StringValidationAddIn": {
+        "name": "StringValidationAddIn",
+        "abstract": true,
+        "description": "Feature for string validations (e.g., minLength, maxLength, pattern).",
+        "$extends": "#/$defs/OptionalPrimitiveType",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "string"
+            ]
+          },
+          "minLength": {
+            "type": "integer"
+          },
+          "maxLength": {
+            "type": "integer"
+          },
+          "pattern": {
+            "type": "string"
+          }
+        }
+      },
+      "StringFormatAddIn": {
+        "name": "StringFormatAddIn",
+        "abstract": true,
+        "description": "Feature for specifying string formats (e.g., email, uri).",
+        "$extends": "#/$defs/OptionalPrimitiveType",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "string"
+            ]
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "email",
+              "hostname",
+              "ipv4",
+              "ipv6",
+              "uri",
+              "uri-reference",
+              "uri-template",
+              "json-pointer",
+              "relative-json-pointer",
+              "regex"
+            ]
+          }
+        }
+      },
+      "ArrayValidationAddIn": {
+        "name": "ArrayValidationAddIn",
+        "abstract": true,
+        "description": "Feature for validating array constraints (e.g., minItems, maxItems, uniqueItems).",
+        "$extends": "#/$defs/ArrayType",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "array"
+            ]
+          },
+          "minItems": {
+            "type": "integer"
+          },
+          "maxItems": {
+            "type": "integer"
+          },
+          "uniqueItems": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ObjectValidationAddIn": {
+        "name": "ObjectValidationAddIn",
+        "abstract": true,
+        "description": "Feature for validating object constraints (e.g., minProperties, maxProperties).",
+        "$extends": "#/$defs/ObjectType",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "object"
+            ]
+          },
+          "minProperties": {
+            "type": "integer"
+          },
+          "maxProperties": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}
