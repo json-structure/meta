@@ -1,6 +1,6 @@
 {
-    "$schema": "https://json-structure.github.io/meta/core//v0/#",
-    "$id": "https://json-structure.github.io/meta/core//v0/#",
+    "$schema": "https://json-structure.github.io/meta/core/v0/#",
+    "$id": "https://json-structure.github.io/meta/core/v0/#",
     "name": "JsonSchema",
     "$root": "#/$defs/SchemaDocument",
     "$defs": {
@@ -399,7 +399,7 @@
             "properties": {
                 "$schema": {
                     "type": "uri",
-                    "const": "https://json-structure.github.io/meta/core//v0/#"
+                    "const": "https://json-structure.github.io/meta/core/v0/#"
                 },
                 "$id": {
                     "type": "uri",

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-structure.github.io/meta/core/v0/#",
-  "$id": "https://json-structure.github.io/meta/extended//v0/#",
-  "$import": "https://json-structure.github.io/meta/core//v0/#",
+  "$id": "https://json-structure.github.io/meta/extended/v0/#",
+  "$import": "https://json-structure.github.io/meta/core/v0/#",
   "$uses": [
     "Import"
   ],
