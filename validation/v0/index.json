@@ -9,5 +9,5 @@
       "JSONStructureConditionalComposition",
       "JSONStructureValidation"
     ],
-    "$root": "#/$defs/SchemaDocument"
+    "$root": "#/definitions/SchemaDocument"
 }
