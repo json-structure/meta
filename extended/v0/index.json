@@ -3,38 +3,38 @@
   "$id": "https://json-structure.github.io/meta/extended/v0/#",
   "$import": "https://json-structure.github.io/meta/core/v0/#",
   "$uses": [
-    "Import"
+    "JSONStructureImport"
   ],
   "$offers": {
-    "Altnames": [
-      "#/$defs/Features/Altnames",
-      "#/$defs/Features/Altsymbols"
+    "JSONStructureAlternateNames": [
+      "#/definitions/features/JSONStructureAlternateNamesAddIn",
+      "#/definitions/features/JSONStructureAlternateSymbolsAddin"
     ],
-    "Units": [
-      "#/$defs/Features/UnitsPropertyAddIn",
-      "#/$defs/Features/UnitsArrayAddIn",
-      "#/$defs/Features/UnitsMapAddIn"
+    "JSONStructureUnits": [
+      "#/definitions/features/UnitsPropertyAddIn",
+      "#/definitions/features/UnitsArrayAddIn",
+      "#/definitions/features/UnitsMapAddIn"
     ],
-    "Import": "#/$defs/Features/ImportAddIn",
-    "Conditionals": "#/$defs/Features/CompositionObjectAddIn",
-    "Validation": [
-      "#/$defs/Features/NumberValidationAddIn",
-      "#/$defs/Features/StringValidationAddIn",
-      "#/$defs/Features/StringFormatAddIn",
-      "#/$defs/Features/ArrayValidationAddIn",
-      "#/$defs/Features/ObjectValidationAddIn"
+    "JSONStructureImport": "#/definitions/features/ImportAddIn",
+    "JSONStructureConditionalComposition": "#/definitions/features/CompositionObjectAddIn",
+    "JSONStructureValidation": [
+      "#/definitions/features/NumberValidationAddIn",
+      "#/definitions/features/StringValidationAddIn",
+      "#/definitions/features/StringFormatAddIn",
+      "#/definitions/features/ArrayValidationAddIn",
+      "#/definitions/features/ObjectValidationAddIn"
     ]
   },
-  "$root": "#/$defs/SchemaDocument",
-  "name": "JsonSchema",
-  "$defs": {
-    "Features": {
+  "$root": "#/definitions/SchemaDocument",
+  "name": "JSONStructureExtended",
+  "definitions": {
+    "features": {
       "description": "Collection of Feature definitions for extended annotations.",
-      "Altnames": {
+      "JSONStructureAlternateNamesAddIn": {
         "type": "object",
         "abstract": true,
         "description": "Feature for alternate names annotation.",
-        "$extends": "#/$defs/Property",
+        "$extends": "#/definitions/Property",
         "properties": {
           "altnames": {
             "type": "map",
@@ -42,16 +42,16 @@
           }
         }
       },
-      "Altsymbols": {
+      "JSONStructureAlternateSymbolsAddIn": {
         "type": "object",
         "abstract": true,
         "description": "Feature for alternate symbols annotation.",
-        "$extends": "#/$defs/Property",
+        "$extends": "#/definitions/Property",
         "properties": {
           "altsymbols": {
             "type": "map",
             "values": {
-              "$ref": "#/$defs/Features/AltsymbolSymbols"
+              "$ref": "#/definitions/features/AltsymbolSymbols"
             }
           }
         }
@@ -65,7 +65,7 @@
         "name": "UnitsAddIn",
         "abstract": true,
         "description": "Feature for unit annotations on property types.",
-        "$extends": "#/$defs/Property",
+        "$extends": "#/definitions/Property",
         "type": "object",
         "properties": {
           "unit": {
@@ -79,7 +79,7 @@
         "name": "UnitsAddIn",
         "abstract": true,
         "description": "Feature for unit annotations on array types.",
-        "$extends": "#/$defs/ArrayType",
+        "$extends": "#/definitions/ArrayType",
         "type": "object",
         "properties": {
           "unit": {
@@ -93,7 +93,7 @@
         "name": "UnitsAddIn",
         "abstract": true,
         "description": "Feature for unit annotations on map types.",
-        "$extends": "#/$defs/MapType",
+        "$extends": "#/definitions/MapType",
         "type": "object",
         "properties": {
           "unit": {
@@ -107,7 +107,7 @@
         "description": "Feature that enables importing definitions from another namespace.",
         "name": "ImportAddIn",
         "abstract": true,
-        "$extends": "#/$defs/Namespace",
+        "$extends": "#/definitions/Namespace",
         "type": "map",
         "values": [
           {
@@ -123,7 +123,7 @@
             "$ref": "#/definitions/Namespace"
           },
           {
-            "$ref": "#/definitions/Features/ImportAddInReference"
+            "$ref": "#/definitions/features/ImportAddInReference"
           }
         ]
       },
@@ -146,7 +146,7 @@
         "name": "CompositionObjectAddIn",
         "abstract": true,
         "description": "Feature for composition constraints such as anyOf, oneOf, allOf, not, if, then, and else.",
-        "$extends": "#/$defs/NoType",
+        "$extends": "#/definitions/NoType",
         "type": "object",
         "properties": {
           "anyOf": {
@@ -246,7 +246,7 @@
         "name": "NumberValidationAddIn",
         "abstract": true,
         "description": "Feature for numeric validations (e.g., minimum, maximum, multipleOf).",
-        "$extends": "#/$defs/OptionalPrimitiveType",
+        "$extends": "#/definitions/OptionalPrimitiveType",
         "type": "object",
         "properties": {
           "type": {
@@ -286,7 +286,7 @@
         "name": "StringValidationAddIn",
         "abstract": true,
         "description": "Feature for string validations (e.g., minLength, maxLength, pattern).",
-        "$extends": "#/$defs/OptionalPrimitiveType",
+        "$extends": "#/definitions/OptionalPrimitiveType",
         "type": "object",
         "properties": {
           "type": {
@@ -310,7 +310,7 @@
         "name": "StringFormatAddIn",
         "abstract": true,
         "description": "Feature for specifying string formats (e.g., email, uri).",
-        "$extends": "#/$defs/OptionalPrimitiveType",
+        "$extends": "#/definitions/OptionalPrimitiveType",
         "type": "object",
         "properties": {
           "type": {
@@ -340,7 +340,7 @@
         "name": "ArrayValidationAddIn",
         "abstract": true,
         "description": "Feature for validating array constraints (e.g., minItems, maxItems, uniqueItems).",
-        "$extends": "#/$defs/ArrayType",
+        "$extends": "#/definitions/ArrayType",
         "type": "object",
         "properties": {
           "type": {
@@ -364,7 +364,7 @@
         "name": "ObjectValidationAddIn",
         "abstract": true,
         "description": "Feature for validating object constraints (e.g., minProperties, maxProperties).",
-        "$extends": "#/$defs/ObjectType",
+        "$extends": "#/definitions/ObjectType",
         "type": "object",
         "properties": {
           "type": {
