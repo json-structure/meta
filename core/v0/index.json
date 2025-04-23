@@ -96,19 +96,12 @@
                         "array",
                         "map",
                         "set",
-                        "tuple"
+                        "tuple",
+                        "choice"
                     ]
                 }
             },
             "additionalProperties": true
-        },
-        "Type": {
-            "type": "object",
-            "$extends": "#/definitions/OptionalType",
-            "description": "Base for all schemas where a type is required (all except the schema document root, which might not be a schema)",
-            "required": [
-                "type"
-            ]
         },
         "PrimitiveType": {
             "type": "object",
@@ -117,6 +110,34 @@
             "required": [
                 "type"
             ]
+        },
+        "CompoundType": {
+            "type": "choice",
+            "description": "A discriminated union of all compound types",
+            "$extends": "#/definitions/OptionalType",
+            "selector": "type",
+            "choices": {
+                "object": { "$ref": "#/definitions/ObjectType" },
+                "array": { "$ref": "#/definitions/ArrayType" },
+                "map": { "$ref": "#/definitions/MapType" },
+                "set": { "$ref": "#/definitions/SetType" },
+                "tuple": { "$ref": "#/definitions/TupleType" },
+                "choice": { "$ref": "#/definitions/ChoiceType" }
+            }
+        },
+        "Type": {
+            "type": [
+                {
+                    "$ref": "#/definitions/PrimitiveType"
+                },
+                {
+                    "$ref": "#/definitions/CompoundType"
+                },
+                {
+                    "$ref": "#/definitions/TypeReference"
+                }
+            ],
+            "description": "A type that can be a primitive type, a compound type, or a reference to a type definition"            
         },
         "TypeReference": {
             "type": "object",
@@ -312,6 +333,34 @@
                 "properties"
             ]
         },
+        "ChoiceType": {
+            "type": "object",
+            "$extends": "#/definitions/OptionalType",
+            "description": "A tagged or inline union of types",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": ["choice"],
+                    "description": "The type of the schema. Must be 'choice'"
+                },                
+                "$extends": {
+                    "type": {
+                        "$ref": "#/definitions/TypeReference"
+                    },
+                    "description": "The shared base type for the inline choices. Must be a reference to an abstract object schema"
+                },
+                "choices": {
+                    "type": "map",
+                    "values": { "$ref": "#/definitions/PrimitiveOrReference" },
+                    "description": "The choices for the union"
+                },
+                "selector": {
+                    "type": "string",
+                    "description": "The property name to discriminate the inline union"
+                }
+            },
+            "required": ["type", "choices"]
+        },
         "TypeUnion": {
             "type": "set",
             "description": "A union of unique types",
@@ -372,24 +421,8 @@
             "type": "map",
             "values": {
                 "type": [
-                    {
-                        "$ref": "#/definitions/ObjectType"
-                    },
-                    {
-                        "$ref": "#/definitions/ArrayType"
-                    },
-                    {
-                        "$ref": "#/definitions/MapType"
-                    },
-                    {
-                        "$ref": "#/definitions/SetType"
-                    },
-                    {
-                        "$ref": "#/definitions/TupleType"
-                    },
-                    {
-                        "$ref": "#/definitions/Namespace"
-                    }
+                    { "$ref": "#/definitions/CompoundType" },
+                    { "$ref": "#/definitions/Namespace" }
                 ]
             }
         },
