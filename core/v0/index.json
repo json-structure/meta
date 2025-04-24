@@ -326,11 +326,19 @@
                         }
                     },
                     "description": "The properties of the object"
+                },
+                "tuple": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The names of the properties in the tuple in the order they must be serialized into the target array"
                 }
             },
             "required": [
                 "type",
-                "properties"
+                "properties",
+                "tuple"
             ]
         },
         "ChoiceType": {
