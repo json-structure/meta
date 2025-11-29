@@ -8,7 +8,7 @@
   "$offers": {
     "JSONStructureAlternateNames": [
       "#/definitions/features/JSONStructureAlternateNamesAddIn",
-      "#/definitions/features/JSONStructureAlternateSymbolsAddin"
+      "#/definitions/features/JSONStructureAlternateSymbolsAddIn"
     ],
     "JSONStructureUnits": [
       "#/definitions/features/UnitsPropertyAddIn",
@@ -29,7 +29,6 @@
   "name": "JSONStructureExtended",
   "definitions": {
     "features": {
-      "description": "Collection of Feature definitions for extended annotations.",
       "JSONStructureAlternateNamesAddIn": {
         "type": "object",
         "abstract": true,
@@ -38,7 +37,9 @@
         "properties": {
           "altnames": {
             "type": "map",
-            "values": "string"
+            "values": {
+              "type": "string"
+            }
           }
         }
       },
@@ -59,7 +60,9 @@
       "AltsymbolSymbols": {
         "type": "map",
         "description": "Mapping for alternate symbol values.",
-        "values": "string"
+        "values": {
+          "type": "string"
+        }
       },
       "UnitsPropertyAddIn": {
         "name": "UnitsAddIn",
@@ -109,23 +112,25 @@
         "abstract": true,
         "$extends": "#/definitions/Namespace",
         "type": "map",
-        "values": [
-          {
-            "$ref": "#/definitions/ObjectType"
-          },
-          {
-            "$ref": "#/definitions/ArrayType"
-          },
-          {
-            "$ref": "#/definitions/MapType"
-          },
-          {
-            "$ref": "#/definitions/Namespace"
-          },
-          {
-            "$ref": "#/definitions/features/ImportAddInReference"
-          }
-        ]
+        "values": {
+          "type": [
+            {
+              "$ref": "#/definitions/ObjectType"
+            },
+            {
+              "$ref": "#/definitions/ArrayType"
+            },
+            {
+              "$ref": "#/definitions/MapType"
+            },
+            {
+              "$ref": "#/definitions/Namespace"
+            },
+            {
+              "$ref": "#/definitions/features/ImportAddInReference"
+            }
+          ]
+        }
       },
       "ImportAddInReference": {
         "name": "ImportAddIn",
