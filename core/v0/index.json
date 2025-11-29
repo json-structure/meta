@@ -153,6 +153,13 @@
                 }
             }
         },
+        "TypeReferenceArray": {
+            "type": "array",
+            "description": "An array of references to existing type definitions for multiple inheritance",
+            "items": {
+                "$ref": "#/definitions/TypeReference"
+            }
+        },
         "PrimitiveOrReference": {
             "type": [
                 {
@@ -184,10 +191,11 @@
                     "description": "Whether this object is abstract and cannot be instantiated"
                 },
                 "$extends": {
-                    "type": {
-                        "$ref": "#/definitions/TypeReference"
-                    },
-                    "description": "The type that this object extends. Must be a reference to an abstract object schema"
+                    "type": [
+                        { "$ref": "#/definitions/TypeReference" },
+                        { "$ref": "#/definitions/TypeReferenceArray" }
+                    ],
+                    "description": "The type or types that this object extends. Must be a reference to an abstract object schema"
                 },
                 "properties": {
                     "type": "map",
@@ -313,10 +321,11 @@
                     "description": "Whether this object is abstract and cannot be instantiated"
                 },
                 "$extends": {
-                    "type": {
-                        "$ref": "#/definitions/TypeReference"
-                    },
-                    "description": "The type that this object extends. Must be a reference to an abstract object schema"
+                    "type": [
+                        { "$ref": "#/definitions/TypeReference" },
+                        { "$ref": "#/definitions/TypeReferenceArray" }
+                    ],
+                    "description": "The type or types that this object extends. Must be a reference to an abstract object schema"
                 },
                 "properties": {
                     "type": "map",
@@ -352,10 +361,11 @@
                     "description": "The type of the schema. Must be 'choice'"
                 },                
                 "$extends": {
-                    "type": {
-                        "$ref": "#/definitions/TypeReference"
-                    },
-                    "description": "The shared base type for the inline choices. Must be a reference to an abstract object schema"
+                    "type": [
+                        { "$ref": "#/definitions/TypeReference" },
+                        { "$ref": "#/definitions/TypeReferenceArray" }
+                    ],
+                    "description": "The shared base type or types for the inline choices. Must be a reference to an abstract object schema"
                 },
                 "choices": {
                     "type": "map",
@@ -477,3 +487,4 @@
         }
     }
 }
+
