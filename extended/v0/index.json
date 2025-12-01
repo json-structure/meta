@@ -52,7 +52,7 @@
           "altsymbols": {
             "type": "map",
             "values": {
-              "$ref": "#/definitions/features/AltsymbolSymbols"
+              "type": { "$ref": "#/definitions/features/AltsymbolSymbols" }
             }
           }
         }

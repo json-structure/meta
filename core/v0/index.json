@@ -117,12 +117,12 @@
             "$extends": "#/definitions/OptionalType",
             "selector": "type",
             "choices": {
-                "object": { "$ref": "#/definitions/ObjectType" },
-                "array": { "$ref": "#/definitions/ArrayType" },
-                "map": { "$ref": "#/definitions/MapType" },
-                "set": { "$ref": "#/definitions/SetType" },
-                "tuple": { "$ref": "#/definitions/TupleType" },
-                "choice": { "$ref": "#/definitions/ChoiceType" }
+                "object": { "type": { "$ref": "#/definitions/ObjectType" } },
+                "array": { "type": { "$ref": "#/definitions/ArrayType" } },
+                "map": { "type": { "$ref": "#/definitions/MapType" } },
+                "set": { "type": { "$ref": "#/definitions/SetType" } },
+                "tuple": { "type": { "$ref": "#/definitions/TupleType" } },
+                "choice": { "type": { "$ref": "#/definitions/ChoiceType" } }
             }
         },
         "Type": {
@@ -157,7 +157,7 @@
             "type": "array",
             "description": "An array of references to existing type definitions for multiple inheritance",
             "items": {
-                "$ref": "#/definitions/TypeReference"
+                "type": { "$ref": "#/definitions/TypeReference" }
             }
         },
         "PrimitiveOrReference": {
@@ -369,7 +369,7 @@
                 },
                 "choices": {
                     "type": "map",
-                    "values": { "$ref": "#/definitions/PrimitiveOrReference" },
+                    "values": { "type": { "$ref": "#/definitions/PrimitiveOrReference" } },
                     "description": "The choices for the union"
                 },
                 "selector": {
@@ -399,7 +399,7 @@
             "$extends": "#/definitions/NoType",
             "properties": {
                 "type": {
-                    "$ref": "#/definitions/Type",
+                    "type": { "$ref": "#/definitions/Type" },
                     "description": "The type of the property"
                 },
                 "description": {
@@ -461,7 +461,7 @@
                     "description": "The root type of this schema document"
                 },
                 "definitions": {
-                    "$ref": "#/definitions/Namespace"
+                    "type": { "$ref": "#/definitions/Namespace" }
                 },
                 "$offers": {
                     "type": "map",
